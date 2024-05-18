@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_application_1/screens/inicio.dart'; 
 
-final GoRouter router = GoRouter(
+final GoRouter appRouter = GoRouter(
   initialLocation: '/',
-  errorPageBuilder: (context, state) {
-    return Scaffold(
-      body: Center(
-        child: Text('Error: ${state.error}'),
-      ),
-    );
-  },
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => Inicio(),
+      builder: (BuildContext context, GoRouterState state) {
+        return Inicio();
+      },
     ),
-
   ],
 );

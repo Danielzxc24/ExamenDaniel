@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/libros.dart';
+import 'package:flutter_application_1/models/villanos.dart';
 
 class DetalleLibroScreen extends StatelessWidget {
   final Libro book;
@@ -17,167 +18,85 @@ class DetalleLibroScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Título',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      book.title,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Año',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      book.year.toString(),
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Editorial',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      book.publisher,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'ISBN',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      book.isbn,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Páginas',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      book.pages.toString(),
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-                    Card(
-                      elevation: 4,
-                      margin: EdgeInsets.symmetric(vertical: 8),
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Notas',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              book.notes.join(", "),
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Card(
-          elevation: 4,
-          margin: EdgeInsets.symmetric(vertical: 8),
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Villanos',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                ...book.villains.map((villain) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4),
-                  child: Text(
-                    villain.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      shadows: [
-                        Shadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          offset: Offset(2, 2),
-                          blurRadius: 8, 
-                        ),
-                      ],
-                    ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildDetailRow('Título', book.title),
+                      _buildDetailRow('Año', book.year.toString()),
+                      _buildDetailRow('Editorial', book.publisher),
+                      _buildDetailRow('ISBN', book.isbn),
+                      _buildDetailRow('Páginas', book.pages.toString()),
+                      _buildDetailRow('Notas', book.notes.join(", ")),
+                    ],
                   ),
-                )),
+                ),
+                SizedBox(width: 16), // Espacio entre columnas
+                Expanded(
+                  child: _buildVillainsSection(book.villains),
+                ),
               ],
             ),
-          ),
-        ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String title, String content) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 8),
+          Text(
+            content,
+            style: TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVillainsSection(List<Villain> villains) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Villanos',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: villains.map((villain) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                villain.name,
+                style: TextStyle(
+                  fontSize: 16,
+                  shadows: [
+                    Shadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      offset: Offset(2, 2),
+                      blurRadius: 8,
+                    ),
+                  ],
+                ),
+              ),
+            )).toList(),
+          ),
+        ],
       ),
     );
   }

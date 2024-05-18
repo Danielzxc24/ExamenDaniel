@@ -1,16 +1,5 @@
-# flutter_application_1
+La aplicación está organizada en diferentes carpetas dentro del directorio lib. En models, encontrará las clases que definen la estructura de los datos, como los libros y los villanos. Services contiene la lógica y la conexión con servicios externos, como la obtención de datos de libros. En screens, se encuentran las pantallas de la aplicación, como la pantalla de inicio y la pantalla de detalles del libro.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Para ejecutar la aplicación, se debe tener Flutter configurado en su entorno de desarrollo. Luego, clonar el repositorio:
+https://github.com/Danielzxc24/ExamenDaniel.git
+y ejecutar flutter pub get para instalar las dependencias necesarias. Una vez hecho esto, se ejecuta la aplicación en un dispositivo o emulador utilizando el comando flutter run.
